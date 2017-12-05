@@ -1,0 +1,48 @@
+// this is a comment until /n
+
+/*
+	this is a comment too 
+*/
+
+
+// typesafe config file can include other conf / json / placehoders for ENV_VARS
+// the path can be absolute or relative 
+// Hint : take care it could become an URI in future version 
+// So resolution should be async
+conf(conf/monFichier.conf)  
+
+// include has the same syntax as conf()
+// it is an inplace include without any check logic
+// this step sould be done before parsing 
+// there's no control done on the file extension
+// it can be many includes in the same file (and includes can contain includes too) 
+include(/global/digischool.kdsl)
+
+// declare required modules 
+// these modules extend the further parsing capabilities of the DSL
+import kkp.commonfilter
+import kkp.keycloak
+
+
+//Various kind of final routes
+
+val serverBlog1 = Backend(internal.ELB.Kblog1, port = 9000)
+val serverBlog2 = Backend(host = internal.ELB.Kblog2, 9000)
+val serverBlog3 = Backend(internal.ELB.Kblog3, 9000)
+val serverBlog4 = Backend(host = internal.ELB.Kblog4, port=9000)
+
+val my404 = forward(http)
+
+val my404 = complete(404,file(/errorPage/404.html))
+val my403 = complete(403, "<html></html>")
+val cdr403 = file(/errorPage/cdr403.html)
+
+
+
+
+
+server("ideeAlaCon.com", 80, root="seo")
+
+//shorcut for
+host(ideeAlaCon.com) port(80) pathOffset(seo)
+

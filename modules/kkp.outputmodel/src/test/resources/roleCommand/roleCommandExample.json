@@ -1,0 +1,11 @@
+{
+  "clientName": "client",
+  "add": [
+    "admin",
+    "toto"
+  ],
+  "remove": [
+    "tata",
+    "titi"
+  ]
+}

@@ -1,0 +1,11 @@
+val serverBlog1 = Backend(internal.ELB.Kblog1, port = 9000)
+val serverBlog2 = Backend(host = internal.ELB.Kblog2, port = 9000)
+val serverBlog3 = Backend(internal.ELB.Kblog3, 9000)
+val serverBlog4 = Backend(host = internal.ELB.Kblog4, port=9000)
+GET Path("/toto") Logged(roles = [admin, toto]) serverBlog4
+POST Path("/titi/tata") {
+  serverBlog2
+  Logged
+  Backend
+}
+GET Path("/superadmin")
